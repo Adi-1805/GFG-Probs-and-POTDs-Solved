@@ -17,9 +17,16 @@ void printArray(int arr[], int size)
 class Solution
 {
     public:
-    void insert(int arr[], int i)
-    {
+    void insert(int arr[], int i){
         //code here
+        int temp=arr[i];
+        int j=i-1;
+            while(j>=0 && temp<arr[j]){
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+                j--;
+            }
         return;
     }
      public:
@@ -28,16 +35,7 @@ class Solution
     {
         //code here
         for(int i=1; i<n; i++){
-            int temp=arr[i];
-            int j=i-1;
-            while(j>=0 && temp<arr[j]){
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-                j--;
-            }
-            // arr[j+1]=temp;
-            
+            insert(arr, i);   
         }
     }
 };
