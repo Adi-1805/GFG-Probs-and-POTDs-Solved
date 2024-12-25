@@ -21,23 +21,20 @@ class MyStack {
   public:
     void push(int x) {
         // code here
-        StackNode * element = new StackNode(x);
-        element -> next = top;
-        top = element;
-        // cout << "Element pushed" << "\n";
-        
+        StackNode *temp = new StackNode(x);
+        temp -> next = top;
+        top = temp;
     }
 
     int pop() {
         // code here
-        if (top == NULL) {
-          return -1;
-        }
-        int topData = top -> data;
-        StackNode * temp = top;
+        if(top == NULL) return -1;
+        int x = top -> data;
+        StackNode *temp = top;
         top = top -> next;
-        delete temp;
-        return topData;
+        temp -> next = NULL;
+        free(temp);
+        return x;
     }
 
     MyStack() { top = NULL; }
