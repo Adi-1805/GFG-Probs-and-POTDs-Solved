@@ -100,6 +100,7 @@ int MyQueue :: pop()
     QueueNode *temp = front;
     int value = front -> data;
     front = front -> next;
+    if(front == NULL) rear = NULL;
     temp -> next = NULL;
     free(temp);
     return value;
