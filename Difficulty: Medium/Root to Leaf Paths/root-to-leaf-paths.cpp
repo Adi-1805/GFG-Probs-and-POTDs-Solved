@@ -15,26 +15,26 @@ struct Node
 */
 
 class Solution {
-    void solve(Node* root, vector<vector<int>>& ans, vector<int>& temp){
+    vector<vector<int>> ans;
+    vector<int> temp;
+    void solve(Node* root){
         if(root == NULL){
             return;
         }
         temp.push_back(root->data);
         if(root->left == NULL and root->right == NULL){
-            ans.push_back(temp);
+            ans.push_back(temp); 
         } 
-        else{
-            solve(root->left, ans, temp);
-            solve(root->right, ans, temp);
-        }
+    
+        solve(root->left);
+        solve(root->right);
+    
         temp.pop_back();
     }
   public:
     vector<vector<int>> Paths(Node* root) {
         // code here
-        vector<vector<int>> ans;
-        vector<int> temp;
-        solve(root, ans, temp);
+        solve(root);
         return ans;
     }
 };
