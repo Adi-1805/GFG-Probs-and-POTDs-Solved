@@ -1,14 +1,16 @@
 // User function Template for C++
 class Solution {
-    int fib(int n){
+    int fib(int n, vector<int>& dp){
         if(n <= 1){
             return n;
         }
-        return fib(n-1)+fib(n-2);
+        if(dp[n] != -1) return dp[n];
+        return dp[n] = fib(n-1, dp)+fib(n-2, dp);
     }
   public:
     int nthFibonacci(int n) {
         // code here
-        return fib(n);
+        vector<int> dp(n+1, -1);
+        return fib(n, dp);
     }
 };
