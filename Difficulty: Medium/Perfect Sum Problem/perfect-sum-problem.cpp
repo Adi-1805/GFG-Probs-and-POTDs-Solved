@@ -1,10 +1,9 @@
 class Solution {
     vector<vector<int>> dp;
     int solve(vector<int>& arr, int ind, int target){
-        if(ind == 0){
-            if(target == 0) return 1 + (target == arr[ind]);
-            return (target == arr[ind]);
-        } 
+        if (ind < 0) {
+            return target == 0 ? 1 : 0;
+        }
         if(dp[ind][target] != -1) return dp[ind][target];
         
         int not_take = solve(arr, ind-1, target);
