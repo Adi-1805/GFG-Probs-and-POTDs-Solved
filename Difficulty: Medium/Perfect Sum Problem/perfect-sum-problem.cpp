@@ -1,22 +1,21 @@
 class Solution {
-    vector<vector<int>> dp;
-    int solve(vector<int>& arr, int ind, int target){
-        if (ind < 0) {
-            return target == 0 ? 1 : 0;
-        }
-        if(dp[ind][target] != -1) return dp[ind][target];
-        
-        int not_take = solve(arr, ind-1, target);
-        int take = 0;
-        if(arr[ind] <= target) take = solve(arr, ind-1, target - arr[ind]);
-        
-        return dp[ind][target] = take + not_take;
-    }
-  public:
+public:
     int perfectSum(vector<int>& arr, int target) {
-        // code here
         int n = arr.size();
-        dp.resize(n, vector<int>(target+1, -1));
-        return solve(arr, n-1, target);
+        vector<vector<int>> dp(n + 1, vector<int>(target + 1, 0));
+        
+        dp[0][0] = 1;
+        
+        for (int i = 1; i <= n; ++i) {
+            for (int j = 0; j <= target; ++j) {
+                dp[i][j] = dp[i-1][j];
+                
+                if (arr[i-1] <= j) {
+                    dp[i][j] += dp[i-1][j - arr[i-1]];
+                }
+            }
+        }
+        
+        return dp[n][target];
     }
 };
