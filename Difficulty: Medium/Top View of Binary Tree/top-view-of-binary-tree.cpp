@@ -18,8 +18,7 @@ class Solution {
         queue<pair<Node*, int>> q;
         q.push({root, 0});
         while(!q.empty()){
-            int n = q.size();
-            while(n--){
+           
                 auto curNode= q.front().first;
                 int vline = q.front().second;
                 q.pop();
@@ -28,7 +27,7 @@ class Solution {
                 if(curNode->left) q.push({curNode->left, vline-1});
                 if(curNode->right) q.push({curNode->right, vline+1});
                 
-            }
+            
         }
         for(auto it:mp) ans.push_back(it.second);
         
