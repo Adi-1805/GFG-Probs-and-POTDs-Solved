@@ -1,30 +1,27 @@
 class Solution {
-    void helper(vector<string>& ans, string s, string& temp, vector<bool>& vis){
-        if(temp.size() == s.size()){
-            ans.push_back(temp);
-            return ;
+    void permute(string in, string out, vector<string>& result){
+        if(in.size() == 0){
+            result.push_back(out);
         }
         
-        for(int i = 0; i < s.size(); i++){
-            if(vis[i] || (i > 0 and s[i] == s[i-1] and vis[i-1] == 0)) continue;
-            else{
-                temp.push_back(s[i]);
-                vis[i] = 1;
-                helper(ans, s, temp, vis);
-                temp.pop_back();
-                vis[i] = 0;
-            }
+        unordered_set<char> used;
+        for(int i = 0; i < in.size(); i++){
+            
+            if(used.count(in[i])) continue;
+            
+            used.insert(in[i]);
+            string newIn = in.substr(0, i) + in.substr(i+1, in.size()-i-1); 
+            string newOut = out + in[i];
+            permute(newIn, newOut, result);
         }
-        
     }
   public:
     vector<string> findPermutation(string &s) {
         // Code here there
-        sort(s.begin(), s.end());
-        vector<string> ans;
-        string temp = "";
-        vector<bool> vis(s.size(), 0);
-        helper(ans, s, temp, vis);
-        return ans;
+        string input = s;
+        string output = "";
+        vector<string> result;
+        permute(input, output, result);
+        return result;
     }
 };
